@@ -87,6 +87,24 @@ const create = async (request, response, next) => {
 }
 
     const usuario = request.body;
+
+    if (
+  typeof usuario.nombre !== "string" ||
+  !usuario.nombre.trim() ||
+  typeof usuario.apellido !== "string" ||
+  !usuario.apellido.trim() ||
+  typeof usuario.correo !== "string" ||
+  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario.correo) ||
+  typeof usuario.password !== "string" ||
+  usuario.password.length < 8 ||
+  !["ADMINISTRADOR", "COMPRAS", "CONSULTA"].includes(usuario.rol) ||
+  typeof usuario.activo !== "boolean"
+) {
+  return response.status(400).json({
+    message: "Los datos del usuario no son válidos.",
+  });
+}
+
     //Encriptación del password
     const passwordHash = await bcrypt.hash(
       usuario.password,
@@ -130,6 +148,23 @@ const create = async (request, response, next) => {
 const register = async (request, response, next) => {
   try {
     const usuario = request.body;
+
+    if (
+      typeof usuario.nombre !== "string" ||
+      !usuario.nombre.trim() ||
+      typeof usuario.apellido !== "string" ||
+      !usuario.apellido.trim() ||
+      typeof usuario.correo !== "string" ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario.correo) ||
+      typeof usuario.password !== "string" ||
+      usuario.password.length < 8
+    ) {
+      return response.status(400).json({
+        message:
+          "Verifique los datos. La contraseña debe tener al menos 12 caracteres.",
+      });
+    }
+    
 
     const rolesPermitidos = [
       "COMPRAS",
@@ -208,6 +243,17 @@ const login = async (
       password
     } = request.body;
 
+    // Validar los datos recibidos
+    if (
+      typeof correo !== "string" ||
+      !correo.trim() ||
+      typeof password !== "string" ||
+      !password
+    ) {
+      return response.status(400).json({
+        message: "Debe proporcionar el correo y la contraseña.",
+      });
+    }
 
     const usuario =
       await prisma.usuario.findUnique({
@@ -276,6 +322,7 @@ const login = async (
 
         {
           expiresIn: "8h",
+          algorithm: "HS256"
         }
       );
 
@@ -339,6 +386,36 @@ const update = async (request, response, next) => {
 
     const id = Number(request.params.id);
     const usuario = request.body;
+
+    if (
+  !Number.isInteger(id) ||
+  id <= 0
+) {
+  return response.status(400).json({
+    message: "El identificador del usuario no es válido.",
+  });
+}
+
+if (
+  (usuario.nombre !== undefined &&
+    (typeof usuario.nombre !== "string" || !usuario.nombre.trim())) ||
+  (usuario.apellido !== undefined &&
+    (typeof usuario.apellido !== "string" || !usuario.apellido.trim())) ||
+  (usuario.correo !== undefined &&
+    (typeof usuario.correo !== "string" ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario.correo))) ||
+  (usuario.rol !== undefined &&
+    !["ADMINISTRADOR", "COMPRAS", "CONSULTA"].includes(usuario.rol)) ||
+  (usuario.activo !== undefined &&
+    typeof usuario.activo !== "boolean") ||
+  (usuario.password !== undefined &&
+    (typeof usuario.password !== "string" ||
+      usuario.password.length < 8))
+) {
+  return response.status(400).json({
+    message: "Los datos del usuario no son válidos.",
+  });
+}
 
     const usuarioActual = await prisma.usuario.findUnique({
       where: {
@@ -478,6 +555,23 @@ const updatePerfil = async (request, response, next) => {
       correo,
       password
     } = request.body;
+
+    if (
+  (nombre !== undefined &&
+    (typeof nombre !== "string" || !nombre.trim())) ||
+  (apellido !== undefined &&
+    (typeof apellido !== "string" || !apellido.trim())) ||
+  (correo !== undefined &&
+    (typeof correo !== "string" ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo))) ||
+  (password !== undefined &&
+    (typeof password !== "string" ||
+      password.length < 8))
+) {
+  return response.status(400).json({
+    message: "Los datos del perfil no son válidos.",
+  });
+}
 
     const data = {
       nombre,

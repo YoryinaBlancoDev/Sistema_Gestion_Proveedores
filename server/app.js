@@ -7,6 +7,11 @@ import { PrismaClient } from "./generated/prisma/client.ts";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 
 dotEnv.config();
+if (!process.env.JWT_SECRET) {
+  throw new Error(
+    "Error de configuración: falta JWT_SECRET en el archivo .env"
+  );
+}
 
 const app = express();
 
@@ -32,7 +37,14 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(logger("dev"));
 
 app.use(express.json());
@@ -50,6 +62,20 @@ app.use("/evaluacionProveedor/", evaluacionProveedorRoutes);
 app.use("/proveedores/", proveedorRoutes);
 app.use("/usuario/", usuarioRoutes);
 app.use("/dashboard",dashboardRoutes);
+
+
+app.use((error, request, response, next) => {
+  console.error("Error del servidor:", error);
+
+  if (response.headersSent) {
+    return next(error);
+  }
+
+  response.status(500).json({
+    message: "Ha ocurrido un error interno en el servidor.",
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
