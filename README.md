@@ -62,3 +62,17 @@ Las credenciales y variables de entorno no deben publicarse en el repositorio. U
 ## Estado del proyecto
 
 Proyecto desarrollado con fines de aprendizaje y portafolio profesional.
+
+## Capturas de pantalla
+
+### Inicio de sesión
+
+![Pantalla de inicio de sesión](docs/capturas/inicio-sesion.png)
+
+### Dashboard
+
+![Dashboard del sistema](docs/capturas/dashboard.png)
+
+### Gestión de proveedores
+
+![Pantalla de gestión de proveedores](docs/capturas/proveedores.png)
