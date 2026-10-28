@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum EstadoProveedor {
+  ACTIVO
+  EN_EVALUACION
+  SUSPENDIDO
+}
+
+enum RolUsuario {
+  ADMINISTRADOR
+  COMPRAS
+  CONSULTA
+}
+
+model CategoriaProveedor {
+  id_categoria Int     @id @default(autoincrement())
+  nombre       String  @unique @db.VarChar(100)
+  descripcion  String? @db.VarChar(255)
+
+  proveedores Proveedor[]
+
+  @@map("categorias_proveedor")
+}
+
+model Proveedor {
+  id_proveedor    Int     @id @default(autoincrement())
+  categoria_id    Int
+  nombre_empresa  String  @db.VarChar(150)
+  cedula_juridica String? @unique @db.VarChar(30)
+  telefono        String? @db.VarChar(20)
+  correo          String? @db.VarChar(150)
+  direccion       String? @db.VarChar(255)
+
+  estado EstadoProveedor @default(EN_EVALUACION)
+
+  fecha_registro DateTime @default(now())
+
+  categoria CategoriaProveedor @relation(fields: [categoria_id], references: [id_categoria])
+
+  contactos    ContactoProveedor[]
+  evaluaciones EvaluacionProveedor[]
+
+  @@index([categoria_id])
+  @@map("proveedores")
+}
+
+model ContactoProveedor {
+  id_contacto  Int @id @default(autoincrement())
+  proveedor_id Int
+
+  nombre   String  @db.VarChar(100)
+  apellido String  @db.VarChar(100)
+  puesto   String? @db.VarChar(100)
+  telefono String? @db.VarChar(20)
+  correo   String? @db.VarChar(150)
+
+  es_principal Boolean @default(false)
+
+  proveedor Proveedor @relation(fields: [proveedor_id], references: [id_proveedor], onDelete: Cascade)
+
+  @@index([proveedor_id])
+  @@map("contactos_proveedor")
+}
+
+model Usuario {
+  id_usuario Int @id @default(autoincrement())
+
+  nombre   String @db.VarChar(100)
+  apellido String @db.VarChar(100)
+  correo   String @unique @db.VarChar(150)
+  password String @db.VarChar(255)
+
+  rol    RolUsuario @default(CONSULTA)
+  activo Boolean    @default(true)
+
+  fecha_registro DateTime @default(now())
+
+  evaluaciones EvaluacionProveedor[]
+
+  @@map("usuarios")
+}
+
+model EvaluacionProveedor {
+  id_evaluacion Int @id @default(autoincrement())
+
+  proveedor_id Int
+  usuario_id   Int
+
+  calificacion Decimal @db.Decimal(2, 1)
+  comentario   String? @db.VarChar(500)
+
+  fecha_evaluacion DateTime @default(now())
+
+  proveedor Proveedor @relation(fields: [proveedor_id], references: [id_proveedor], onDelete: Cascade)
+
+  usuario Usuario @relation(fields: [usuario_id], references: [id_usuario])
+
+  @@index([proveedor_id])
+  @@index([usuario_id])
+  @@map("evaluaciones_proveedor")
+}

@@ -1,0 +1,64 @@
+@if (usuario(); as usuario) {
+
+  <div class="detail-card">
+
+    <h2>
+      {{ usuario.nombre }} {{ usuario.apellido }}
+    </h2>
+
+    <p>
+      <strong>Correo:</strong>
+      {{ usuario.correo }}
+    </p>
+
+    <p>
+      <strong>Rol:</strong>
+
+      <span
+        class="rol"
+        [class.administrador]="usuario.rol === 'ADMINISTRADOR'"
+        [class.consulta]="usuario.rol === 'CONSULTA'"
+        [class.compras]="usuario.rol === 'COMPRAS'"
+      >
+      </span>
+
+      {{ formatearRol(usuario.rol) }}
+    </p>
+
+    <p>
+      <strong>Estado:</strong>
+
+      <span
+        class="estado"
+        [class.activo]="usuario.activo"
+        [class.inactivo]="!usuario.activo"
+      >
+        {{ usuario.activo ? 'Activo' : 'Inactivo' }}
+      </span>
+    </p>
+
+    <p>
+      <strong>Fecha de registro:</strong>
+      {{ usuario.fecha_registro | date:'dd/MM/yyyy' }}
+    </p>
+    
+    <!-- Botón regresar -->
+    <div class="acciones">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="regresar()"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        Regresar
+      </button>
+    </div>
+    
+
+  </div>
+
+} @else {
+
+  <p>Cargando usuario...</p>
+
+}

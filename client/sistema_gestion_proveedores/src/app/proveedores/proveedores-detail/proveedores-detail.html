@@ -1,0 +1,68 @@
+@if (proveedor(); as proveedor) {
+
+  <div class="detail-card">
+
+    <h2>{{ proveedor.nombre_empresa }}</h2>
+
+    <p>
+      <strong>Categoría:</strong>
+      {{ proveedor.categoria.nombre }}
+    </p>
+
+    <p>
+      <strong>Cédula jurídica:</strong>
+      {{ proveedor.cedula_juridica }}
+    </p>
+
+    <p>
+      <strong>Teléfono:</strong>
+      {{ proveedor.telefono }}
+    </p>
+
+    <p>
+      <strong>Correo:</strong>
+      {{ proveedor.correo }}
+    </p>
+
+    <p>
+      <strong>Dirección:</strong>
+      {{ proveedor.direccion }}
+    </p>
+
+    <p>
+    <strong>Estado:</strong>
+
+    <span
+      class="estado"
+      [class.activo]="proveedor.estado === 'ACTIVO'"
+      [class.evaluacion]="proveedor.estado === 'EN_EVALUACION'"
+      [class.suspendido]="proveedor.estado === 'SUSPENDIDO'"
+    >
+      {{ formatearEstado(proveedor.estado) }}
+    </span>
+    </p>
+
+    <p>
+      <strong>Fecha de registro:</strong>
+       {{ proveedor.fecha_registro | date:'dd/MM/yyyy' }}
+    </p>
+
+    <!-- Botón regresar -->
+    <div class="acciones">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="regresar()"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        Regresar
+      </button>
+    </div>
+
+  </div>
+
+} @else {
+
+  <p>Cargando proveedor...</p>
+
+}

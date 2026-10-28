@@ -1,0 +1,139 @@
+<mat-card class="full-width">
+
+  <mat-card-header class="card-header">
+    <mat-card-title>Contactos del Proveedor</mat-card-title>
+
+    @if (puedeModificar) {
+    <button
+      mat-mini-fab
+      matTooltip="Crear Contacto"
+      aria-label="Crear contacto"
+      routerLink="/contactos/create"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  }
+  </mat-card-header>
+
+  <mat-card-content>
+
+        <mat-form-field
+      appearance="outline"
+      class="filtro">
+
+      <mat-label>Buscar contacto</mat-label>
+
+      <input
+        matInput
+        type="text"
+        placeholder="Nombre, proveedor, puesto, teléfono o correo"
+        (input)="aplicarFiltro($event)"
+      >
+
+      <mat-icon matSuffix>
+        search
+      </mat-icon>
+
+    </mat-form-field>
+
+    <div class="mat-elevation-z2 table-container">
+
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="full-width-table"
+        matSort
+        aria-label="Contactos"
+      >
+
+        <!-- Nombre -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Nombre
+          </th>
+
+          <td mat-cell *matCellDef="let row">
+            {{ row.nombre }}
+          </td>
+        </ng-container>
+
+        <!-- Apellido -->
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Apellido
+          </th>
+
+          <td mat-cell *matCellDef="let row">
+            {{ row.apellido }}
+          </td>
+        </ng-container>
+
+        <!-- Proveedor -->
+        <ng-container matColumnDef="proveedor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Proveedor
+          </th>
+
+          <td mat-cell *matCellDef="let row">
+            {{ row.proveedor.nombre_empresa }}
+          </td>
+        </ng-container>
+
+      
+
+        <!-- Acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>
+            Acciones
+          </th>
+
+          <td mat-cell *matCellDef="let row">
+
+           <button
+              mat-icon-button
+              matTooltip="Ver detalle"
+              (click)="detalle(row)"
+            >
+              <mat-icon>visibility</mat-icon>
+            </button>
+
+            @if (puedeModificar) {
+            <button
+              mat-icon-button
+              matTooltip="Editar"
+              [routerLink]="['/contactos/update', row.id_contacto]"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          }
+
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+        ></tr>
+
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+
+      </table>
+
+      <mat-paginator
+        #paginator
+        [length]="dataSource.data.length"
+        [pageIndex]="0"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        aria-label="Seleccionar página"
+      >
+      </mat-paginator>
+
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

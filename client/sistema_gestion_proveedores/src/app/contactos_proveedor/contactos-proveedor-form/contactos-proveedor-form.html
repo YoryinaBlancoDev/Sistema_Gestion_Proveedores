@@ -1,0 +1,257 @@
+<form
+  [formGroup]="contactoForm"
+  (ngSubmit)="guardar()"
+  novalidate
+>
+
+  <mat-card class="form-card">
+
+    <mat-card-header class="form-header">
+
+      <mat-card-title>
+        {{ titleForm }} contacto
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        @if (isCreate) {
+          Registre la información del nuevo contacto
+        } @else {
+          Modifique la información del contacto
+        }
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <div class="form-grid">
+
+       <!-- Proveedor -->
+<mat-form-field appearance="outline" class="proveedor-field">
+
+  <mat-label>Proveedor</mat-label>
+
+  <input
+    matInput
+    type="text"
+    formControlName="proveedor_busqueda"
+    [matAutocomplete]="autoProveedor"
+    (input)="filtrarProveedores($event)"
+    placeholder="Buscar proveedor"
+  />
+
+  <mat-autocomplete
+    #autoProveedor="matAutocomplete"
+    (optionSelected)="seleccionarProveedor($event.option.value)"
+  >
+    @for (
+      proveedor of proveedoresFiltrados;
+      track proveedor.id_proveedor
+    ) {
+      <mat-option
+        [value]="proveedor"
+       
+      >
+        {{ proveedor.nombre_empresa }}
+      </mat-option>
+    }
+  </mat-autocomplete>
+
+  @if (
+    contactoForm.get('proveedor_busqueda')?.hasError('required')
+  ) {
+    <mat-error>
+      El proveedor es requerido
+    </mat-error>
+  } @else if (
+    contactoForm.get('proveedor_busqueda')?.hasError('proveedorInvalido')
+  ) {
+    <mat-error>
+      Seleccione un proveedor de la lista
+    </mat-error>
+  }
+
+</mat-form-field>
+
+
+        <!-- Nombre -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Nombre</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="nombre"
+            maxlength="100"
+          />
+
+          @if (errorHandling('nombre', 'required')) {
+            <mat-error>
+              El nombre es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('nombre', 'minlength')) {
+            <mat-error>
+              El nombre debe tener al menos 3 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Apellido -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Apellido</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="apellido"
+            maxlength="100"
+          />
+
+          @if (errorHandling('apellido', 'required')) {
+            <mat-error>
+              El apellido es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('apellido', 'minlength')) {
+            <mat-error>
+              El apellido debe tener al menos 3 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Puesto -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Puesto</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="puesto"
+            maxlength="100"
+          />
+
+          <mat-hint>
+            Opcional
+          </mat-hint>
+
+          @if (errorHandling('puesto', 'minlength')) {
+            <mat-error>
+              El puesto debe tener al menos 3 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Teléfono -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Teléfono</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="telefono"
+            maxlength="9"
+            inputmode="numeric"
+            placeholder="8888-8888"
+            (input)="formatearTelefono($event)"
+          />
+
+          @if (errorHandling('telefono', 'required')) {
+            <mat-error>
+              El teléfono es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('telefono', 'pattern')) {
+            <mat-error>
+              El formato debe ser XXXX-XXXX
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Correo -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Correo electrónico</mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="correo"
+            maxlength="150"
+            placeholder="contacto@correo.com"
+          />
+
+          @if (errorHandling('correo', 'required')) {
+            <mat-error>
+              El correo es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('correo', 'pattern')) {
+            <mat-error>
+              Ingrese un correo electrónico válido
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+      </div>
+
+
+      <!-- Contacto principal -->
+      <div class="principal-container">
+
+        <mat-checkbox formControlName="es_principal">
+          Contacto principal
+        </mat-checkbox>
+
+        <p class="principal-hint">
+          Indica si este es el contacto principal del proveedor.
+        </p>
+
+      </div>
+
+    </mat-card-content>
+
+
+    <mat-card-actions
+      align="end"
+      class="form-actions"
+    >
+
+      <button
+        mat-button
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        type="submit"
+      >
+        {{ isCreate ? 'Crear' : 'Actualizar' }}
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>

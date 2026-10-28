@@ -1,0 +1,271 @@
+<form
+  [formGroup]="usuarioForm"
+  (ngSubmit)="guardar()"
+  novalidate
+>
+
+  <mat-card class="form-card">
+
+    <mat-card-header class="form-header">
+      <mat-card-title>
+        {{ titleForm }} usuario
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        @if (isCreate) {
+          Registre la información del nuevo usuario
+        } @else {
+          Modifique la información del usuario
+        }
+      </mat-card-subtitle>
+    </mat-card-header>
+
+
+    <mat-card-content>
+      @if (!isCreate && esMiPropiaCuenta()) {
+        <div class="aviso-propio">
+          Está editando su propia cuenta. Su rol y estado no pueden
+          modificarse desde esta sección.
+        </div>
+      }
+      <div class="form-grid">
+
+        
+
+        <!-- Nombre -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Nombre</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="nombre"
+            maxlength="150"
+          />
+
+          @if (errorHandling('nombre', 'required')) {
+            <mat-error>
+              El nombre es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('nombre', 'minlength')) {
+            <mat-error>
+              El nombre debe tener al menos 3 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Apellido -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Apellido</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="apellido"
+            maxlength="150"
+          />
+
+          @if (errorHandling('apellido', 'required')) {
+            <mat-error>
+              El apellido es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('apellido', 'minlength')) {
+            <mat-error>
+              El apellido debe tener al menos 3 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Correo -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Correo electrónico</mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="correo"
+            maxlength="150"
+            placeholder="usuario@correo.com"
+          />
+
+          @if (errorHandling('correo', 'required')) {
+            <mat-error>
+              El correo es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('correo', 'pattern')) {
+            <mat-error>
+              Ingrese un correo electrónico válido
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+       <!-- Contraseña -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            @if (isCreate) {
+              Contraseña
+            } @else {
+              Nueva contraseña
+            }
+          </mat-label>
+
+          <input
+            matInput
+            [type]="mostrarPassword ? 'text' : 'password'"
+            formControlName="password"
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="mostrarPassword = !mostrarPassword"
+            [attr.aria-label]="
+              mostrarPassword
+                ? 'Ocultar contraseña'
+                : 'Mostrar contraseña'
+            "
+          >
+            <mat-icon>
+              {{ mostrarPassword ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </button>
+
+          @if (!isCreate) {
+            <mat-hint>
+              Déjela vacía para conservar la contraseña actual
+            </mat-hint>
+          }
+
+          @if (
+            isCreate &&
+            errorHandling('password', 'required')
+          ) {
+            <mat-error>
+              La contraseña es requerida
+            </mat-error>
+          }
+
+          @if (errorHandling('password', 'minlength')) {
+            <mat-error>
+              La contraseña debe tener al menos 8 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Rol -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Rol</mat-label>
+
+          <mat-select formControlName="rol">
+
+            <mat-option value="ADMINISTRADOR">
+              Administrador
+            </mat-option>
+
+            <mat-option value="COMPRAS">
+              Compras
+            </mat-option>
+
+            <mat-option value="CONSULTA">
+              Consulta
+            </mat-option>
+
+          </mat-select>
+          @if (esMiPropiaCuenta()) {
+            <mat-hint>
+              No puede modificar su propio rol.
+            </mat-hint>
+         }
+
+          @if (errorHandling('rol', 'required')) {
+            <mat-error>
+              El rol es requerido
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- Estado -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Estado</mat-label>
+
+          <mat-select formControlName="activo">
+
+            <mat-option [value]="true">
+              Activo
+            </mat-option>
+
+            <mat-option [value]="false">
+              Inactivo
+            </mat-option>
+
+          </mat-select>
+
+          @if (esMiPropiaCuenta()) {
+            <mat-hint>
+              No puede desactivar su propia cuenta.
+            </mat-hint>
+          }
+
+          @if (errorHandling('activo', 'required')) {
+            <mat-error>
+              El estado es requerido
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+      </div>
+
+    </mat-card-content>
+
+
+    <mat-card-actions
+      align="end"
+      class="form-actions"
+    >
+
+      <button
+        mat-button
+        type="button"
+         class="btn-cancelar"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        type="submit"
+        class="btn-guardar"
+      >
+        {{ isCreate ? 'Crear' : 'Actualizar' }}
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>

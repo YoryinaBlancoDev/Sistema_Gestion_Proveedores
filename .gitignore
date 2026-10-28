@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Permitir archivos de ejemplo en subcarpetas
+!*/
+!**/.env.example
+
+# Archivos de registro
+*.log
+
+# Instrucciones auxiliares de herramientas de desarrollo
+server/.agents/
+server/.claude/
+server/.windsurf/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db

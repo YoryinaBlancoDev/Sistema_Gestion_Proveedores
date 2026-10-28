@@ -1,0 +1,84 @@
+<mat-card class="detail-card">
+
+  <mat-card-header class="detail-header">
+
+    <div>
+      <mat-card-title>
+        Detalle de categoría
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Información de la categoría del proveedor
+      </mat-card-subtitle>
+    </div>
+
+  </mat-card-header>
+
+
+  <mat-card-content>
+
+    @if (categoria(); as categoriaActual) {
+
+      <div class="detalle">
+
+        <!-- Nombre -->
+        <div class="campo">
+
+          <span class="label">
+            Nombre
+          </span>
+
+          <span class="valor">
+            {{ categoriaActual.nombre }}
+          </span>
+
+        </div>
+
+
+        <!-- Descripción -->
+        <div class="campo">
+
+          <span class="label">
+            Descripción
+          </span>
+
+          <span class="valor descripcion">
+            {{
+              categoriaActual.descripcion ||
+              'Sin descripción'
+            }}
+          </span>
+
+        </div>
+
+      </div>
+
+    } @else {
+
+      <div class="cargando">
+        Cargando categoría...
+      </div>
+
+    }
+
+  </mat-card-content>
+
+
+  <mat-card-actions
+    align="end"
+    class="detail-actions"
+  >
+
+    <button
+      mat-button
+      type="button"
+      (click)="regresar()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+      Regresar
+    </button>
+
+
+  </mat-card-actions>
+
+</mat-card>

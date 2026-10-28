@@ -1,0 +1,190 @@
+:host {
+  display: block;
+  min-height: calc(100vh - 64px);
+}
+
+.auth-container {
+  min-height: calc(100vh - 64px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 560px;
+
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.auth-header {
+  padding: 28px 30px 12px;
+}
+
+.auth-header mat-card-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.auth-header mat-card-subtitle {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+mat-card-content {
+  padding: 22px 30px 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* =========================
+   ICONOS
+   ========================= */
+
+mat-form-field mat-icon[matPrefix] {
+  margin-right: 10px;
+}
+
+/* =========================
+   REGISTRO
+   ========================= */
+
+.registro-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  column-gap: 18px;
+  row-gap: 12px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   BOTÓN PRINCIPAL
+   ========================= */
+
+.submit-button {
+  width: 100%;
+  min-height: 46px;
+
+  margin-top: 4px;
+
+  border-radius: 9px;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* =========================
+   CAMBIO LOGIN / REGISTRO
+   ========================= */
+
+.auth-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  margin-top: 22px;
+  padding-top: 18px;
+
+  border-top: 1px solid #e8e8e8;
+
+  font-size: 14px;
+}
+
+.auth-switch span {
+  color: #666;
+}
+
+.auth-switch button {
+  font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 600px) {
+
+  :host {
+    min-height: 100vh;
+  }
+
+  .auth-container {
+    min-height: 100vh;
+    padding: 15px;
+  }
+
+  .auth-card {
+    border-radius: 12px;
+  }
+
+  .auth-header {
+    padding: 22px 20px 10px;
+  }
+
+  .auth-header mat-card-title {
+    font-size: 23px;
+  }
+
+  mat-card-content {
+    padding: 18px 20px 22px;
+  }
+
+  .registro-grid {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .auth-switch {
+    flex-wrap: wrap;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .auth-container {
+    padding: 8px;
+  }
+
+  .auth-header {
+    padding: 20px 16px 8px;
+  }
+
+  mat-card-content {
+    padding: 16px;
+  }
+
+}

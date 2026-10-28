@@ -1,0 +1,35 @@
+.footer {
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: black;
+  color: white;
+
+  box-sizing: border-box;
+}
+
+.title-center {
+  margin: 0;
+
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.4;
+
+  word-break: break-word;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    min-height: 52px;
+    padding: 10px 12px;
+  }
+
+  .title-center {
+    font-size: 12px;
+  }
+}

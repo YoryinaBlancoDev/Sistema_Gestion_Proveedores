@@ -1,0 +1,264 @@
+<form
+  [formGroup]="evaluacionForm"
+  (ngSubmit)="guardar()"
+  novalidate
+>
+
+  <mat-card class="form-card">
+
+    <mat-card-header class="form-header">
+
+      <mat-card-title>
+        {{ titleForm }} evaluación
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        @if (isCreate) {
+          Registre una nueva evaluación de proveedor
+        } @else {
+          Modifique la información de la evaluación
+        }
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <div class="form-grid">
+
+        <!-- PROVEEDOR BUSCABLE -->
+        <mat-form-field
+          appearance="outline"
+          class="proveedor-field"
+        >
+
+          <mat-label>Proveedor</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="proveedor_busqueda"
+            [matAutocomplete]="autoProveedor"
+            (input)="filtrarProveedores($event)"
+            placeholder="Buscar proveedor"
+          />
+
+          <mat-autocomplete
+            #autoProveedor="matAutocomplete"
+            [displayWith]="mostrarProveedor"
+            (optionSelected)="seleccionarProveedor($event.option.value)"
+          >
+
+            @for (
+              proveedor of proveedoresFiltrados;
+              track proveedor.id_proveedor
+            ) {
+
+              <mat-option [value]="proveedor">
+                {{ proveedor.nombre_empresa }}
+              </mat-option>
+
+            }
+
+          </mat-autocomplete>
+
+          @if (
+            evaluacionForm
+              .get('proveedor_busqueda')
+              ?.hasError('required')
+          ) {
+            <mat-error>
+              El proveedor es requerido
+            </mat-error>
+          } @else if (
+            evaluacionForm
+              .get('proveedor_busqueda')
+              ?.hasError('proveedorInvalido')
+          ) {
+            <mat-error>
+              Seleccione un proveedor de la lista
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        @if (esAdministrador) {
+
+       <!-- USUARIO BUSCABLE -->
+        <mat-form-field
+        appearance="outline"
+        class="usuario-field"
+        >
+
+       
+
+        <mat-label>Usuario</mat-label>
+
+        <input
+            matInput
+            type="text"
+            formControlName="usuario_busqueda"
+            [matAutocomplete]="autoUsuario"
+            (input)="filtrarUsuarios($event)"
+            placeholder="Buscar usuario"
+        />
+
+        <mat-autocomplete
+            #autoUsuario="matAutocomplete"
+            [displayWith]="mostrarUsuario"
+            (optionSelected)="seleccionarUsuario($event.option.value)"
+        >
+
+            @for (
+            usuario of usuariosFiltrados;
+            track usuario.id_usuario
+            ) {
+
+            <mat-option [value]="usuario">
+                {{ usuario.nombre }}
+                {{ usuario.apellido }}
+            </mat-option>
+
+            }
+
+        </mat-autocomplete>
+
+        @if (
+            evaluacionForm
+            .get('usuario_busqueda')
+            ?.hasError('required')
+        ) {
+            <mat-error>
+            El usuario es requerido
+            </mat-error>
+        } @else if (
+            evaluacionForm
+            .get('usuario_busqueda')
+            ?.hasError('usuarioInvalido')
+        ) {
+            <mat-error>
+            Seleccione un usuario de la lista
+            </mat-error>
+        }
+
+        </mat-form-field>
+      }
+
+      @if (esCompras && usuarioActual) {
+
+        <div class="usuario-evaluador">
+
+          <strong>
+            Evaluación realizada por:
+          </strong>
+
+          <span>
+            {{ usuarioActual.nombre }}
+            {{ usuarioActual.apellido }}
+          </span>
+
+        </div>
+      }
+        <!-- CALIFICACIÓN -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Calificación</mat-label>
+
+          <input
+            matInput
+            type="number"
+            formControlName="calificacion"
+            min="1"
+            max="5"
+            step="0.1"
+            placeholder="Ejemplo: 4.5"
+          />
+
+          @if (
+            errorHandling('calificacion', 'required')
+          ) {
+            <mat-error>
+              La calificación es requerida
+            </mat-error>
+          }
+
+          @if (
+            errorHandling('calificacion', 'min')
+          ) {
+            <mat-error>
+              La calificación mínima es 1
+            </mat-error>
+          }
+
+          @if (
+            errorHandling('calificacion', 'max')
+          ) {
+            <mat-error>
+              La calificación máxima es 5
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <!-- COMENTARIO -->
+        <mat-form-field
+          appearance="outline"
+          class="comentario-field"
+        >
+
+          <mat-label>Comentario</mat-label>
+
+          <textarea
+            matInput
+            formControlName="comentario"
+            rows="5"
+            maxlength="500"
+            placeholder="Escriba un comentario sobre la evaluación"
+          ></textarea>
+
+          <mat-hint align="end">
+            {{ evaluacionForm.get('comentario')?.value?.length || 0 }}/500
+          </mat-hint>
+
+          @if (
+            errorHandling('comentario', 'maxlength')
+          ) {
+            <mat-error>
+              El comentario no puede superar los 500 caracteres
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+      </div>
+
+    </mat-card-content>
+
+
+    <mat-card-actions
+      align="end"
+      class="form-actions"
+    >
+
+      <button
+        mat-button
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        type="submit"
+      >
+        {{ isCreate ? 'Crear' : 'Actualizar' }}
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>

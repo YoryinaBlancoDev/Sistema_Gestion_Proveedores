@@ -1,0 +1,265 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+
+/* =========================
+   TARJETA
+   ========================= */
+
+.form-card {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 20px auto;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.form-header {
+  padding: 24px 24px 10px;
+}
+
+.form-header mat-card-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.form-header mat-card-subtitle {
+  margin-top: 6px;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  color: #777;
+}
+
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+mat-card-content {
+  padding: 20px 24px;
+}
+
+
+/* =========================
+   INFORMACIÓN DEL PERFIL
+   ========================= */
+
+.perfil-info {
+  margin-bottom: 20px;
+}
+
+.rol-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 14px 18px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+
+  background-color: #fafafa;
+}
+
+.rol-info .label {
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #666;
+}
+
+.rol-info .value {
+  font-size: 15px;
+  font-weight: 500;
+
+  color: #222;
+}
+
+
+/* =========================
+   GRID DEL FORMULARIO
+   ========================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  min-width: 0;
+}
+
+.full-row {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================
+   ACCIONES
+   ========================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 16px 24px 24px;
+}
+
+.form-actions button {
+  min-width: 120px;
+  border-radius: 8px;
+}
+
+
+/* =========================
+   CARGANDO
+   ========================= */
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 180px;
+
+  font-size: 14px;
+  color: #777;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .form-card {
+    margin: 10px auto;
+
+    border-radius: 12px;
+  }
+
+  .form-header {
+    padding: 20px 18px 8px;
+  }
+
+  .form-header mat-card-title {
+    font-size: 23px;
+  }
+
+  .form-header mat-card-subtitle {
+    font-size: 13px;
+  }
+
+  mat-card-content {
+    padding: 15px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .full-row {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    padding: 15px 18px 20px;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONO
+   ========================= */
+
+@media (max-width: 480px) {
+
+  .form-card {
+    margin: 5px auto;
+
+    border-radius: 10px;
+  }
+
+  .form-header {
+    padding: 16px 14px 7px;
+  }
+
+  .form-header mat-card-title {
+    font-size: 21px;
+    line-height: 1.25;
+  }
+
+  .form-header mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  mat-card-content {
+    padding: 12px 14px;
+  }
+
+  .perfil-info {
+    margin-bottom: 15px;
+  }
+
+  .rol-info {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 5px;
+
+    padding: 12px 14px;
+  }
+
+  .form-grid {
+    gap: 8px;
+  }
+
+  mat-form-field {
+    font-size: 14px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+
+    gap: 8px;
+
+    padding: 12px 14px 18px;
+  }
+
+  .form-actions button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+}

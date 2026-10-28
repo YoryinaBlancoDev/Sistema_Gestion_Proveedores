@@ -1,0 +1,126 @@
+@if (evaluacion(); as evaluacion) {
+
+  <mat-card class="detail-card">
+
+    <mat-card-header class="detail-header">
+
+      <div>
+        <mat-card-title>
+          Detalle de evaluación
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          Información de la evaluación realizada al proveedor
+        </mat-card-subtitle>
+      </div>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <div class="detail-grid">
+
+        <!-- Proveedor -->
+        <div class="detail-item">
+          <span class="label">
+            Proveedor
+          </span>
+
+          <span class="value">
+            {{ evaluacion.proveedor.nombre_empresa }}
+          </span>
+        </div>
+
+
+        <!-- Usuario -->
+        <div class="detail-item">
+          <span class="label">
+            Evaluado por
+          </span>
+
+          <span class="value">
+            {{ evaluacion.usuario.nombre }}
+            {{ evaluacion.usuario.apellido }}
+          </span>
+        </div>
+
+
+        <!-- Calificación -->
+        <div class="detail-item">
+          <span class="label">
+            Calificación
+          </span>
+
+          <span class="value calificacion">
+            {{ evaluacion.calificacion }}
+          </span>
+        </div>
+
+
+        <!-- Fecha -->
+        <div class="detail-item">
+          <span class="label">
+            Fecha de evaluación
+          </span>
+
+          <span class="value">
+            {{
+              evaluacion.fecha_evaluacion
+                | date:'dd/MM/yyyy'
+            }}
+          </span>
+        </div>
+
+
+        <!-- Comentario -->
+        <div class="detail-item comentario-item">
+          <span class="label">
+            Comentario
+          </span>
+
+          <span class="value comentario">
+            {{
+              evaluacion.comentario
+                || 'Sin comentario'
+            }}
+          </span>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+
+    <mat-card-actions
+      align="end"
+      class="detail-actions"
+    >
+
+      <button
+        mat-raised-button
+        type="button"
+        (click)="regresar()"
+      >
+        <mat-icon>
+          arrow_back
+        </mat-icon>
+
+        Regresar
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+} @else {
+
+  <div class="loading-container">
+
+    <p>
+      Cargando evaluación...
+    </p>
+
+  </div>
+
+}

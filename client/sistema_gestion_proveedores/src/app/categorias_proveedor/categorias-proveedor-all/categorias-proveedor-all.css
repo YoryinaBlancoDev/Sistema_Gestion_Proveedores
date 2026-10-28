@@ -1,0 +1,288 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================
+   TARJETA
+   ========================= */
+
+.list-card {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.list-header {
+  padding: 24px 24px 10px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  gap: 20px;
+}
+
+.header-content mat-card-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.header-content mat-card-subtitle {
+  margin-top: 6px;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  color: #777;
+}
+
+.btn-crear {
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.btn-crear mat-icon {
+  margin-right: 5px;
+}
+
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+mat-card-content {
+  padding: 20px 24px 24px;
+}
+
+
+/* =========================
+   FILTRO
+   ========================= */
+
+.filtro-container {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.filtro {
+  width: 100%;
+  max-width: 450px;
+}
+
+
+/* =========================
+   TABLA
+   ========================= */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  min-width: 650px;
+}
+
+th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td,
+th {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+td {
+  vertical-align: middle;
+}
+
+
+/* =========================
+   ACCIONES
+   ========================= */
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+/* =========================
+   SIN RESULTADOS
+   ========================= */
+
+.sin-resultados {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 150px;
+  padding: 20px;
+
+  color: #777;
+
+  text-align: center;
+  font-size: 14px;
+}
+
+.sin-resultados mat-icon {
+  width: 36px;
+  height: 36px;
+
+  font-size: 36px;
+
+  color: #999;
+}
+
+
+/* =========================
+   PAGINADOR
+   ========================= */
+
+mat-paginator {
+  margin-top: 10px;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .list-card {
+    margin: 10px auto;
+    border-radius: 12px;
+  }
+
+  .list-header {
+    padding: 20px 18px 8px;
+  }
+
+  .header-content {
+    align-items: flex-start;
+  }
+
+  .header-content mat-card-title {
+    font-size: 23px;
+  }
+
+  .header-content mat-card-subtitle {
+    font-size: 13px;
+  }
+
+  mat-card-content {
+    padding: 15px 18px 20px;
+  }
+
+  .filtro {
+    max-width: 100%;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONO
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .list-card {
+    margin: 5px auto;
+    border-radius: 10px;
+  }
+
+  .list-header {
+    padding: 16px 14px 8px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 14px;
+  }
+
+  .header-content mat-card-title {
+    font-size: 21px;
+    line-height: 1.25;
+  }
+
+  .header-content mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  .btn-crear {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  mat-card-content {
+    padding: 12px 14px 18px;
+  }
+
+  table {
+    min-width: 600px;
+  }
+
+  td,
+  th {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .sin-resultados {
+    min-height: 120px;
+    font-size: 13px;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONOS PEQUEÑOS
+   ========================= */
+
+@media (max-width: 400px) {
+
+  .list-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  mat-card-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .header-content mat-card-title {
+    font-size: 20px;
+  }
+
+}

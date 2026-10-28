@@ -1,0 +1,256 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.detail-card {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 20px auto;
+
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.detail-header {
+  padding: 24px 24px 10px;
+}
+
+.detail-header mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.detail-header mat-card-subtitle {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+mat-card-content {
+  padding: 20px 24px;
+}
+
+
+/* =========================
+   GRID DE DETALLES
+   ========================= */
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px 22px;
+}
+
+
+/* =========================
+   CAMPOS
+   ========================= */
+
+.detail-item {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 16px;
+
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+
+  background-color: #fafafa;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #666;
+}
+
+.value {
+  font-size: 16px;
+
+  color: #222;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   CALIFICACIÓN
+   ========================= */
+
+.calificacion {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   COMENTARIO
+   ========================= */
+
+.comentario-item {
+  grid-column: 1 / -1;
+}
+
+.comentario {
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+
+/* =========================
+   ACCIONES
+   ========================= */
+
+.detail-actions {
+  padding: 10px 24px 24px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detail-actions button {
+  min-width: 120px;
+
+  border-radius: 8px;
+}
+
+.detail-actions mat-icon {
+  margin-right: 5px;
+}
+
+
+/* =========================
+   CARGANDO
+   ========================= */
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 250px;
+
+  font-size: 15px;
+  color: #666;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .detail-card {
+    margin: 10px auto;
+    border-radius: 12px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .comentario-item {
+    grid-column: auto;
+  }
+
+  .detail-header {
+    padding: 20px 18px 8px;
+  }
+
+  .detail-header mat-card-title {
+    font-size: 22px;
+  }
+
+  .detail-header mat-card-subtitle {
+    font-size: 13px;
+  }
+
+  mat-card-content {
+    padding: 15px 18px;
+  }
+
+  .detail-actions {
+    padding: 10px 18px 20px;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONO
+   ========================= */
+
+@media (max-width: 480px) {
+
+  .detail-card {
+    margin: 5px auto;
+    border-radius: 10px;
+  }
+
+  .detail-header {
+    padding: 16px 15px 8px;
+  }
+
+  .detail-header mat-card-title {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+
+  .detail-header mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  mat-card-content {
+    padding: 12px 15px;
+  }
+
+  .detail-grid {
+    gap: 12px;
+  }
+
+  .detail-item {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .value {
+    font-size: 15px;
+  }
+
+  .calificacion {
+    font-size: 20px;
+  }
+
+  .detail-actions {
+    padding: 8px 15px 18px;
+  }
+
+  .detail-actions button {
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,211 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+/* =========================
+   TARJETA
+   ========================= */
+
+.form-card {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 20px auto;
+  padding: 10px;
+
+  background-color: #ffffff;
+
+  border-radius: 14px;
+
+  box-shadow: 0 4px 18px
+    rgba(0, 0, 0, 0.08);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.form-header {
+  margin-bottom: 10px;
+  padding: 20px 20px 10px;
+}
+
+.form-header mat-card-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.form-header mat-card-subtitle {
+  margin-top: 6px;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  color: #777777;
+}
+
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+mat-card-content {
+  padding: 20px;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================
+   BOTONES
+   ========================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin: 5px 20px 10px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.form-actions button {
+  min-width: 110px;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .form-card {
+    margin: 10px auto;
+    padding: 8px;
+
+    border-radius: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .form-header {
+    padding: 16px 12px 8px;
+  }
+
+  .form-header mat-card-title {
+    font-size: 23px;
+  }
+
+  .form-header mat-card-subtitle {
+    font-size: 13px;
+  }
+
+  mat-card-content {
+    padding: 15px 12px;
+  }
+
+  .form-actions {
+    margin: 5px 12px 10px;
+
+    padding-top: 16px;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONO
+   ========================= */
+
+@media (max-width: 480px) {
+
+  .form-card {
+    margin: 5px auto;
+    padding: 6px;
+
+    border-radius: 10px;
+  }
+
+  .form-header {
+    padding: 14px 10px 6px;
+  }
+
+  .form-header mat-card-title {
+    font-size: 21px;
+    line-height: 1.25;
+  }
+
+  .form-header mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  mat-card-content {
+    padding: 12px 10px;
+  }
+
+  .form-grid {
+    gap: 8px;
+  }
+
+  mat-form-field {
+    font-size: 14px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
+    gap: 8px;
+
+    margin: 5px 10px 12px;
+
+    padding-top: 14px;
+  }
+
+  .form-actions button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+}
+.aviso-propio {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+
+  background-color: #fafafa;
+  color: #555;
+
+  font-size: 14px;
+  line-height: 1.4;
+}

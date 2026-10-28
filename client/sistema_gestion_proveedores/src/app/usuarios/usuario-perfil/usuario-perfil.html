@@ -1,0 +1,211 @@
+<form
+  [formGroup]="perfilForm"
+  (ngSubmit)="guardar()"
+  novalidate
+>
+
+  <mat-card class="form-card">
+
+    <mat-card-header class="form-header">
+
+      <mat-card-title>
+        Mi perfil
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Actualice su información personal
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      @if (perfil) {
+
+        <div class="perfil-info">
+
+          <div class="rol-info">
+            <span class="label">
+              Rol
+            </span>
+
+            <span class="value">
+              {{ formatearRol(perfil.rol) }}
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <!-- Nombre -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Nombre</mat-label>
+
+            <input
+              matInput
+              type="text"
+              formControlName="nombre"
+              maxlength="150"
+            />
+
+            @if (errorHandling('nombre', 'required')) {
+              <mat-error>
+                El nombre es requerido
+              </mat-error>
+            }
+
+            @if (errorHandling('nombre', 'minlength')) {
+              <mat-error>
+                El nombre debe tener al menos 3 caracteres
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+
+          <!-- Apellido -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Apellido</mat-label>
+
+            <input
+              matInput
+              type="text"
+              formControlName="apellido"
+              maxlength="150"
+            />
+
+            @if (errorHandling('apellido', 'required')) {
+              <mat-error>
+                El apellido es requerido
+              </mat-error>
+            }
+
+            @if (errorHandling('apellido', 'minlength')) {
+              <mat-error>
+                El apellido debe tener al menos 3 caracteres
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+
+          <!-- Correo -->
+          <mat-form-field
+            appearance="outline"
+            class="full-row"
+          >
+
+            <mat-label>Correo electrónico</mat-label>
+
+            <input
+              matInput
+              type="email"
+              formControlName="correo"
+              maxlength="150"
+              placeholder="usuario@correo.com"
+            />
+
+            @if (errorHandling('correo', 'required')) {
+              <mat-error>
+                El correo es requerido
+              </mat-error>
+            }
+
+            @if (errorHandling('correo', 'pattern')) {
+              <mat-error>
+                Ingrese un correo electrónico válido
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+
+          <!-- Nueva contraseña -->
+          <mat-form-field 
+            appearance="outline" 
+            class="full-row"
+          >
+
+            <mat-label>
+              Nueva contraseña
+            </mat-label>
+
+            <input
+              matInput
+              [type]="mostrarPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Ingrese una nueva contraseña"
+            />
+
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="mostrarPassword = !mostrarPassword"
+              [attr.aria-label]="
+                mostrarPassword
+                  ? 'Ocultar contraseña'
+                  : 'Mostrar contraseña'
+              "
+            >
+              <mat-icon>
+                {{ mostrarPassword ? 'visibility_off' : 'visibility' }}
+              </mat-icon>
+            </button>
+
+            <mat-hint>
+              Déjela vacía para conservar la contraseña actual
+            </mat-hint>
+
+            @if (errorHandling('password', 'minlength')) {
+              <mat-error>
+                La contraseña debe tener al menos 8 caracteres
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+        </div>
+
+      } @else {
+
+        <div class="loading-container">
+          Cargando perfil...
+        </div>
+
+      }
+
+    </mat-card-content>
+
+
+    <mat-card-actions
+      align="end"
+      class="form-actions"
+    >
+
+      <button
+        mat-button
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="!perfil"
+      >
+        Guardar cambios
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>

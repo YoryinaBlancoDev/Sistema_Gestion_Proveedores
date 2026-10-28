@@ -1,0 +1,393 @@
+<div class="auth-container">
+
+  <mat-card class="auth-card">
+
+    <mat-card-header class="auth-header">
+
+      <mat-card-title>
+        @if (modoRegistro) {
+          Crear cuenta
+        } @else {
+          Iniciar sesión
+        }
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        @if (modoRegistro) {
+          Complete sus datos para crear una cuenta
+        } @else {
+          Ingrese sus credenciales para acceder al sistema
+        }
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <!-- ========================= -->
+      <!-- LOGIN -->
+      <!-- ========================= -->
+
+      @if (!modoRegistro) {
+
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="iniciarSesion()"
+          novalidate
+        >
+
+          <!-- CORREO -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Correo electrónico</mat-label>
+
+            <input
+              matInput
+              type="email"
+              formControlName="correo"
+              placeholder="correo@ejemplo.com"
+            />
+
+            <mat-icon matPrefix>
+              email
+            </mat-icon>
+
+            @if (
+              errorLogin('correo', 'required')
+            ) {
+              <mat-error>
+                El correo es requerido
+              </mat-error>
+            } @else if (
+              errorLogin('correo', 'email')
+            ) {
+              <mat-error>
+                Ingrese un correo válido
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+
+          <!-- CONTRASEÑA -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Contraseña</mat-label>
+
+            <input
+              matInput
+              [type]="ocultarPassword ? 'password' : 'text'"
+              formControlName="password"
+              placeholder="Ingrese su contraseña"
+            />
+
+            <mat-icon matPrefix>
+              lock
+            </mat-icon>
+
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              aria-label="Mostrar u ocultar contraseña"
+              (click)="ocultarPassword = !ocultarPassword"
+            >
+
+              <mat-icon>
+                {{
+                  ocultarPassword
+                    ? 'visibility_off'
+                    : 'visibility'
+                }}
+              </mat-icon>
+
+            </button>
+
+            @if (
+              errorLogin('password', 'required')
+            ) {
+              <mat-error>
+                La contraseña es requerida
+              </mat-error>
+            } @else if (
+              errorLogin('password', 'minlength')
+            ) {
+              <mat-error>
+                La contraseña debe tener al menos 8 caracteres
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+
+          <!-- BOTÓN LOGIN -->
+          <button
+            mat-raised-button
+            type="submit"
+            class="submit-button"
+          >
+            Iniciar sesión
+          </button>
+
+        </form>
+
+
+        <!-- CAMBIAR A REGISTRO -->
+        <div class="auth-switch">
+
+          <span>
+            ¿No tiene una cuenta?
+          </span>
+
+          <button
+            mat-button
+            type="button"
+            (click)="cambiarModo()"
+          >
+            Registrarse
+          </button>
+
+        </div>
+
+      }
+
+
+      <!-- ========================= -->
+      <!-- REGISTRO -->
+      <!-- ========================= -->
+
+      @else {
+
+        <form
+          [formGroup]="registroForm"
+          (ngSubmit)="registrar()"
+          novalidate
+        >
+
+          <div class="registro-grid">
+
+
+            <!-- NOMBRE -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Nombre</mat-label>
+
+              <input
+                matInput
+                type="text"
+                formControlName="nombre"
+                placeholder="Ingrese su nombre"
+              />
+
+              <mat-icon matPrefix>
+                person
+              </mat-icon>
+
+              @if (
+                errorRegistro('nombre', 'required')
+              ) {
+                <mat-error>
+                  El nombre es requerido
+                </mat-error>
+              } @else if (
+                errorRegistro('nombre', 'minlength')
+              ) {
+                <mat-error>
+                  Debe tener al menos 3 caracteres
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <!-- APELLIDO -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Apellido</mat-label>
+
+              <input
+                matInput
+                type="text"
+                formControlName="apellido"
+                placeholder="Ingrese su apellido"
+              />
+
+              <mat-icon matPrefix>
+                person
+              </mat-icon>
+
+              @if (
+                errorRegistro('apellido', 'required')
+              ) {
+                <mat-error>
+                  El apellido es requerido
+                </mat-error>
+              } @else if (
+                errorRegistro('apellido', 'minlength')
+              ) {
+                <mat-error>
+                  Debe tener al menos 3 caracteres
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <!-- CORREO -->
+            <mat-form-field
+              appearance="outline"
+              class="full-width"
+            >
+
+              <mat-label>Correo electrónico</mat-label>
+
+              <input
+                matInput
+                type="email"
+                formControlName="correo"
+                placeholder="correo@ejemplo.com"
+              />
+
+              <mat-icon matPrefix>
+                email
+              </mat-icon>
+
+              @if (
+                errorRegistro('correo', 'required')
+              ) {
+                <mat-error>
+                  El correo es requerido
+                </mat-error>
+              } @else if (
+                errorRegistro('correo', 'email')
+              ) {
+                <mat-error>
+                  Ingrese un correo válido
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <!-- CONTRASEÑA -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Contraseña</mat-label>
+
+              <input
+                matInput
+                [type]="ocultarPassword ? 'password' : 'text'"
+                formControlName="password"
+                placeholder="Mínimo 8 caracteres"
+              />
+
+              <mat-icon matPrefix>
+                lock
+              </mat-icon>
+
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                aria-label="Mostrar u ocultar contraseña"
+                (click)="ocultarPassword = !ocultarPassword"
+              >
+
+                <mat-icon>
+                  {{
+                    ocultarPassword
+                      ? 'visibility_off'
+                      : 'visibility'
+                  }}
+                </mat-icon>
+
+              </button>
+
+              @if (
+                errorRegistro('password', 'required')
+              ) {
+                <mat-error>
+                  La contraseña es requerida
+                </mat-error>
+              } @else if (
+                errorRegistro('password', 'minlength')
+              ) {
+                <mat-error>
+                  Debe tener al menos 8 caracteres
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <!-- ROL -->
+            <mat-form-field appearance="outline">
+
+              <mat-label>Rol</mat-label>
+
+              <mat-select formControlName="rol">
+
+                <mat-option value="COMPRAS">
+                  Compras
+                </mat-option>
+
+                <mat-option value="CONSULTA">
+                  Consulta
+                </mat-option>
+
+              </mat-select>
+
+              <mat-icon matPrefix>
+                badge
+              </mat-icon>
+
+              @if (
+                errorRegistro('rol', 'required')
+              ) {
+                <mat-error>
+                  Seleccione un rol
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+          </div>
+
+
+          <!-- BOTÓN REGISTRO -->
+          <button
+            mat-raised-button
+            type="submit"
+            class="submit-button"
+          >
+            Crear cuenta
+          </button>
+
+        </form>
+
+
+        <!-- VOLVER AL LOGIN -->
+        <div class="auth-switch">
+
+          <span>
+            ¿Ya tiene una cuenta?
+          </span>
+
+          <button
+            mat-button
+            type="button"
+            (click)="cambiarModo()"
+          >
+            Iniciar sesión
+          </button>
+
+        </div>
+
+      }
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

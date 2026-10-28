@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>
+  Detalle del contacto
+</h2>
+
+<mat-dialog-content>
+
+  <div class="detalle-contacto">
+
+    <div class="campo">
+      <strong>Nombre:</strong>
+      <span>
+        {{ data.nombre }} {{ data.apellido }}
+      </span>
+    </div>
+
+    <div class="campo">
+      <strong>Proveedor:</strong>
+      <span>
+        {{ data.proveedor.nombre_empresa }}
+      </span>
+    </div>
+
+    <div class="campo">
+      <strong>Puesto:</strong>
+      <span>
+        {{ data.puesto || 'No especificado' }}
+      </span>
+    </div>
+
+    <div class="campo">
+      <strong>Teléfono:</strong>
+      <span>
+        {{ data.telefono || 'No especificado' }}
+      </span>
+    </div>
+
+    <div class="campo">
+      <strong>Correo:</strong>
+      <span>
+        {{ data.correo || 'No especificado' }}
+      </span>
+    </div>
+
+    <div class="campo">
+      <strong>Contacto principal:</strong>
+
+      <span
+        class="estado"
+        [class.principal]="data.es_principal"
+        [class.secundario]="!data.es_principal"
+      >
+        {{ data.es_principal ? 'Sí' : 'No' }}
+      </span>
+    </div>
+
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    mat-dialog-close
+  >
+    Cerrar
+  </button>
+
+</mat-dialog-actions>

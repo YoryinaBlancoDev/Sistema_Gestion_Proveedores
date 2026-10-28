@@ -1,0 +1,841 @@
+<div class="dashboard-container">
+
+  <!-- =========================
+       BIENVENIDA
+       ========================= -->
+
+  <section class="bienvenida">
+
+    <div>
+
+      <p class="subtitulo">
+        Sistema de Gestión de Proveedores
+      </p>
+
+      <h1>
+        Bienvenid@{{ usuario ? ', ' + usuario.nombre : '' }}
+      </h1>
+
+      <p>
+        Consulte el estado general del sistema y acceda
+        rápidamente a sus principales funciones.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       RESUMEN DEL SISTEMA
+       ========================= -->
+
+  @if (cargando()) {
+
+    <section class="estado-dashboard">
+
+      <mat-icon>
+        hourglass_empty
+      </mat-icon>
+
+      <p>
+        Cargando resumen del sistema...
+      </p>
+
+    </section>
+
+  } @else if (resumen(); as datos) {
+
+    <section class="resumen-dashboard">
+
+      <!-- =========================
+           TÍTULO RESUMEN
+           ========================= -->
+
+      <div class="seccion-titulo">
+
+        <div>
+
+          <h2>
+            Resumen general
+          </h2>
+
+          <p>
+            Estado actual de los proveedores registrados.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           KPI PROVEEDORES
+           ========================= -->
+
+      <div class="kpi-grid">
+
+
+        <!-- TOTAL PROVEEDORES -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono">
+              <mat-icon>business</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.proveedores.total }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Proveedores
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- ACTIVOS -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono activo">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.proveedores.activos }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Activos
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- EN EVALUACIÓN -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono evaluacion">
+              <mat-icon>pending_actions</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.proveedores.enEvaluacion }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                En evaluación
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- SUSPENDIDOS -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono suspendido">
+              <mat-icon>pause_circle</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.proveedores.suspendidos }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Suspendidos
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      </div>
+
+
+      <!-- =========================
+           KPI EVALUACIONES
+           ========================= -->
+
+      <div class="kpi-grid secundario">
+
+
+        <!-- PROMEDIO GENERAL -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono">
+              <mat-icon>star</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.evaluaciones.promedioGeneral }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Promedio general
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- PROMEDIO >= 4 -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono">
+              <mat-icon>workspace_premium</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.evaluaciones.proveedoresPromedioAlto }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Proveedores con promedio ≥ 4
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- TOTAL EVALUACIONES -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono">
+              <mat-icon>rate_review</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.evaluaciones.total }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Evaluaciones
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- TOTAL CONTACTOS -->
+
+        <mat-card class="kpi-card">
+
+          <mat-card-content>
+
+            <div class="kpi-icono">
+              <mat-icon>person_search</mat-icon>
+            </div>
+
+            <div class="kpi-informacion">
+
+              <span class="kpi-valor">
+                {{ datos.contactos.total }}
+              </span>
+
+              <span class="kpi-etiqueta">
+                Contactos registrados
+              </span>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      </div>
+
+
+      <!-- =========================
+           ANÁLISIS
+           ========================= -->
+
+      <div class="analisis-grid">
+
+
+        <!-- DISTRIBUCIÓN POR ESTADO -->
+
+        <mat-card class="analisis-card">
+
+          <mat-card-header>
+
+            <mat-icon mat-card-avatar>
+              donut_large
+            </mat-icon>
+
+            <mat-card-title>
+              Distribución por estado
+            </mat-card-title>
+
+            <mat-card-subtitle>
+              Estado actual de los proveedores
+            </mat-card-subtitle>
+
+          </mat-card-header>
+
+          <mat-card-content>
+
+            <div class="grafico-container">
+
+              <canvas
+                baseChart
+                [data]="datosGrafico()"
+                [options]="opcionesGrafico"
+                [type]="tipoGrafico">
+              </canvas>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- ATENCIÓN REQUERIDA -->
+
+        <mat-card class="analisis-card">
+
+          <mat-card-header>
+
+            <mat-icon mat-card-avatar>
+              notification_important
+            </mat-icon>
+
+            <mat-card-title>
+              Atención requerida
+            </mat-card-title>
+
+            <mat-card-subtitle>
+              Información que conviene revisar
+            </mat-card-subtitle>
+
+          </mat-card-header>
+
+          <mat-card-content>
+
+
+            <!-- SIN EVALUACIÓN -->
+
+            <div class="alerta-item">
+
+              <div class="alerta-icono">
+
+                <mat-icon>
+                  star_border
+                </mat-icon>
+
+              </div>
+
+              <div class="alerta-texto">
+
+                <strong>
+                  {{ datos.evaluaciones.proveedoresSinEvaluacion }}
+                </strong>
+
+                <span>
+                  proveedores sin evaluaciones
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- SIN CONTACTO PRINCIPAL -->
+
+            <div class="alerta-item">
+
+              <div class="alerta-icono">
+
+                <mat-icon>
+                  person_off
+                </mat-icon>
+
+              </div>
+
+              <div class="alerta-texto">
+
+                <strong>
+                  {{ datos.contactos.proveedoresSinContactoPrincipal }}
+                </strong>
+
+                <span>
+                  proveedores sin contacto principal
+                </span>
+
+              </div>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      </div>
+
+
+      <!-- =========================
+           TOP 5 PROVEEDORES
+           ========================= -->
+
+      <mat-card class="analisis-card top-card">
+
+        <mat-card-header>
+
+          <mat-icon mat-card-avatar>
+            emoji_events
+          </mat-icon>
+
+          <mat-card-title>
+            Proveedores mejor evaluados
+          </mat-card-title>
+
+          <mat-card-subtitle>
+            Top 5 según calificación promedio
+          </mat-card-subtitle>
+
+        </mat-card-header>
+
+
+        <mat-card-content>
+
+          @if (datos.topProveedores.length > 0) {
+
+            <div class="tabla-contenedor">
+
+              <table
+                mat-table
+                [dataSource]="datos.topProveedores"
+                class="top-table">
+
+
+                <!-- POSICIÓN -->
+
+                <ng-container matColumnDef="posicion">
+
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef>
+
+                    #
+
+                  </th>
+
+                  <td
+                    mat-cell
+                    *matCellDef="let proveedor; let i = index">
+
+                    <span class="posicion">
+                      {{ i + 1 }}
+                    </span>
+
+                  </td>
+
+                </ng-container>
+
+
+                <!-- PROVEEDOR -->
+
+                <ng-container matColumnDef="proveedor">
+
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef>
+
+                    Proveedor
+
+                  </th>
+
+                  <td
+                    mat-cell
+                    *matCellDef="let proveedor">
+
+                    {{ proveedor.nombre_empresa }}
+
+                  </td>
+
+                </ng-container>
+
+
+                <!-- PROMEDIO -->
+
+                <ng-container matColumnDef="promedio">
+
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef>
+
+                    Promedio
+
+                  </th>
+
+                  <td
+                    mat-cell
+                    *matCellDef="let proveedor">
+
+                    <div class="calificacion">
+
+                      <mat-icon>
+                        star
+                      </mat-icon>
+
+                      <span>
+                        {{ proveedor.promedio }}
+                      </span>
+
+                    </div>
+
+                  </td>
+
+                </ng-container>
+
+
+                <!-- EVALUACIONES -->
+
+                <ng-container matColumnDef="evaluaciones">
+
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef>
+
+                    Evaluaciones
+
+                  </th>
+
+                  <td
+                    mat-cell
+                    *matCellDef="let proveedor">
+
+                    {{ proveedor.cantidadEvaluaciones }}
+
+                  </td>
+
+                </ng-container>
+
+
+                <!-- FILAS -->
+
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="displayedColumnsTop">
+                </tr>
+
+                <tr
+                  mat-row
+                  *matRowDef="
+                    let row;
+                    columns: displayedColumnsTop
+                  ">
+                </tr>
+
+              </table>
+
+            </div>
+
+          } @else {
+
+            <div class="sin-datos">
+
+              <mat-icon>
+                info
+              </mat-icon>
+
+              <span>
+                Todavía no hay evaluaciones registradas.
+              </span>
+
+            </div>
+
+          }
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </section>
+
+  } @else {
+
+    <!-- =========================
+         ERROR DASHBOARD
+         ========================= -->
+
+    <section class="estado-dashboard">
+
+      <mat-icon>
+        error_outline
+      </mat-icon>
+
+      <p>
+        No fue posible cargar el resumen del sistema.
+      </p>
+
+    </section>
+
+  }
+
+
+  <!-- =========================
+       ACCESOS RÁPIDOS
+       ========================= -->
+
+  <section class="accesos">
+
+    <div class="seccion-titulo">
+
+      <div>
+
+        <h2>
+          Accesos rápidos
+        </h2>
+
+        <p>
+          Ingrese a los principales módulos del sistema.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="opciones">
+
+
+      <!-- PROVEEDORES -->
+
+      <mat-card
+        class="opcion-card"
+        (click)="irA('/proveedores')">
+
+        <mat-card-content>
+
+          <div class="icono">
+            <mat-icon>business</mat-icon>
+          </div>
+
+          <h2>
+            Proveedores
+          </h2>
+
+          <p>
+            Consulte la información de los proveedores registrados.
+          </p>
+
+          <button
+            mat-button
+            type="button"
+            (click)="irA('/proveedores'); $event.stopPropagation()">
+
+            Ver proveedores
+
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+
+      <!-- CONTACTOS -->
+
+      <mat-card
+        class="opcion-card"
+        (click)="irA('/contactos')">
+
+        <mat-card-content>
+
+          <div class="icono">
+            <mat-icon>contacts</mat-icon>
+          </div>
+
+          <h2>
+            Contactos
+          </h2>
+
+          <p>
+            Consulte los contactos asociados a cada proveedor.
+          </p>
+
+          <button
+            mat-button
+            type="button"
+            (click)="irA('/contactos'); $event.stopPropagation()">
+
+            Ver contactos
+
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+
+      <!-- EVALUACIONES -->
+
+      <mat-card
+        class="opcion-card"
+        (click)="irA('/evaluaciones')">
+
+        <mat-card-content>
+
+          <div class="icono">
+            <mat-icon>star_rate</mat-icon>
+          </div>
+
+          <h2>
+            Evaluaciones
+          </h2>
+
+          <p>
+            Consulte y gestione las evaluaciones de proveedores.
+          </p>
+
+          <button
+            mat-button
+            type="button"
+            (click)="irA('/evaluaciones'); $event.stopPropagation()">
+
+            Ver evaluaciones
+
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+
+      <!-- SOLO ADMINISTRADOR -->
+
+      @if (esAdministrador) {
+
+
+        <!-- CATEGORÍAS -->
+
+        <mat-card
+          class="opcion-card"
+          (click)="irA('/categorias')">
+
+          <mat-card-content>
+
+            <div class="icono">
+              <mat-icon>category</mat-icon>
+            </div>
+
+            <h2>
+              Categorías
+            </h2>
+
+            <p>
+              Administre las categorías disponibles para los proveedores.
+            </p>
+
+            <button
+              mat-button
+              type="button"
+              (click)="irA('/categorias'); $event.stopPropagation()">
+
+              Gestionar categorías
+
+            </button>
+
+          </mat-card-content>
+
+        </mat-card>
+
+
+        <!-- USUARIOS -->
+
+        <mat-card
+          class="opcion-card"
+          (click)="irA('/usuarios')">
+
+          <mat-card-content>
+
+            <div class="icono">
+              <mat-icon>manage_accounts</mat-icon>
+            </div>
+
+            <h2>
+              Usuarios
+            </h2>
+
+            <p>
+              Administre los usuarios y sus permisos dentro del sistema.
+            </p>
+
+            <button
+              mat-button
+              type="button"
+              (click)="irA('/usuarios'); $event.stopPropagation()">
+
+              Gestionar usuarios
+
+            </button>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      }
+
+    </div>
+
+  </section>
+
+</div>

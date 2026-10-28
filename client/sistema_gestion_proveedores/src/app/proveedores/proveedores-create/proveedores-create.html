@@ -1,0 +1,219 @@
+<form
+  [formGroup]="proveedorForm"
+  (ngSubmit)="guardar()"
+  novalidate
+>
+  <mat-card class="form-card">
+
+    <mat-card-header>
+      <mat-card-title>
+        {{ titleForm }} proveedor
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <div class="form-grid">
+
+        <!-- Empresa -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre de la empresa</mat-label>
+
+          <input
+            matInput
+            formControlName="nombre_empresa"
+          />
+
+          @if (errorHandling('nombre_empresa', 'required')) {
+            <mat-error>
+              El nombre de la empresa es requerido
+            </mat-error>
+          }
+
+          @if (errorHandling('nombre_empresa', 'minlength')) {
+            <mat-error>
+              Debe contener al menos 3 caracteres
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Categoría -->
+        <mat-form-field appearance="outline">
+          <mat-label>Categoría</mat-label>
+
+          <mat-select formControlName="categoria_id">
+            @for (categoria of categoriaList; track categoria.id_categoria) {
+              <mat-option
+                [value]="categoria.id_categoria"
+              >
+                {{ categoria.nombre }}
+              </mat-option>
+            }
+          </mat-select>
+
+          @if (errorHandling('categoria_id', 'required')) {
+            <mat-error>
+              La categoría es requerida
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Cédula -->
+       <mat-form-field appearance="outline">
+        <mat-label>Cédula jurídica</mat-label>
+
+            <input
+              matInput
+              formControlName="cedula_juridica"
+              maxlength="10"
+              placeholder="3101123456"
+              (input)="convertirCedulaMayuscula()"
+            />
+
+            <mat-hint>
+              Ejemplo: 3101123456 o 3101A00001
+            </mat-hint>
+
+            @if (errorHandling('cedula_juridica', 'required')) {
+              <mat-error>
+                La cédula jurídica es requerida.
+              </mat-error>
+            }
+
+            @if (cedulaError() === 'length') {
+              <mat-error>
+                La cédula jurídica debe tener exactamente 10 caracteres.
+              </mat-error>
+            }
+
+            @if (cedulaError() === 'tipo') {
+              <mat-error>
+                El tipo de persona jurídica no es válido.
+              </mat-error>
+            }
+
+            @if (cedulaError() === 'clase') {
+              <mat-error>
+                La clase de persona jurídica no es válida para el tipo indicado.
+              </mat-error>
+            }
+
+            @if (cedulaError() === 'consecutivo') {
+              <mat-error>
+                El consecutivo de la cédula jurídica no tiene un formato válido.
+              </mat-error>
+            }
+        </mat-form-field>
+
+        <!-- Teléfono -->
+        <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+
+        <input
+          matInput
+          formControlName="telefono"
+          maxlength="9"
+          placeholder="8888-1111"
+          inputmode="numeric"
+          (input)="formatearTelefono()"
+        />
+
+        @if (errorHandling('telefono', 'required')) {
+          <mat-error>
+            El teléfono es requerido.
+          </mat-error>
+        }
+
+        @if (errorHandling('telefono', 'pattern')) {
+          <mat-error>
+            El teléfono debe contener 8 dígitos.
+          </mat-error>
+        }
+        </mat-form-field>
+
+        <!-- Correo -->
+        <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="correo"
+          />
+
+            @if (errorHandling('correo', 'required')) {
+              <mat-error>
+                El correo es requerido
+              </mat-error>
+            }
+
+            @if (errorHandling('correo', 'pattern')) {
+              <mat-error>
+                Ingrese un correo válido. Ejemplo: usuario@dominio.com
+              </mat-error>
+            }
+        </mat-form-field>
+
+        <!-- Estado -->
+        <mat-form-field appearance="outline">
+          <mat-label>Estado</mat-label>
+
+          <mat-select formControlName="estado">
+            <mat-option value="ACTIVO">
+              Activo
+            </mat-option>
+
+            <mat-option value="EN_EVALUACION">
+              En evaluación
+            </mat-option>
+
+            <mat-option value="SUSPENDIDO">
+              Suspendido
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Dirección -->
+        <mat-form-field
+          appearance="outline"
+          class="full-row"
+        >
+          <mat-label>Dirección</mat-label>
+
+          <textarea
+            matInput
+            rows="3"
+            formControlName="direccion"
+          ></textarea>
+           @if (errorHandling('direccion', 'required')) {
+              <mat-error>
+              La dirección es requerida
+              </mat-error>
+            }
+        </mat-form-field>
+
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+
+      <button
+        mat-button
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        type="submit"
+      >
+        {{ isCreate ? 'Crear' : 'Actualizar' }}
+      </button>
+
+    </mat-card-actions>
+
+  </mat-card>
+</form>

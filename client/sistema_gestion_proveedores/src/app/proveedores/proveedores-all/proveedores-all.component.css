@@ -1,0 +1,243 @@
+/* =========================
+   TARJETA PRINCIPAL
+   ========================= */
+
+.full-width {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 20px auto;
+  padding: 10px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.card-header button {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   TABLA
+   ========================= */
+
+.table-container {
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: auto;
+
+  border-radius: 10px;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.full-width-table {
+  width: 100%;
+  min-width: 560px;
+}
+
+
+/* =========================
+   ENCABEZADOS
+   ========================= */
+
+th.mat-mdc-header-cell {
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   CELDAS
+   ========================= */
+
+td.mat-mdc-cell {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+
+/* =========================
+   COLUMNAS
+   ========================= */
+
+.mat-column-categoria {
+  min-width: 150px;
+}
+
+.mat-column-nombre_empresa {
+  min-width: 210px;
+}
+
+.mat-column-acciones {
+  width: 150px;
+  min-width: 150px;
+
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mat-column-acciones button {
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+th.mat-column-acciones {
+  text-align: center;
+}
+
+
+/* =========================
+   BOTONES DE ACCIONES
+   ========================= */
+
+.mat-column-acciones button {
+  margin: 0 2px;
+}
+
+
+/* =========================
+   PAGINADOR
+   ========================= */
+
+mat-paginator {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* =========================
+   FILTRO DE BÚSQUEDA
+   ========================= */
+
+.filtro {
+  width: calc(100% - 64px);
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+.filtro input {
+  font-size: 14px;
+}
+
+.filtro mat-icon {
+  color: #666;
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .full-width {
+    margin: 10px auto;
+    padding: 8px;
+  }
+
+  .filtro {
+    width: calc(100% - 32px);
+    max-width: 100%;
+    margin-left: 16px;
+    margin-bottom: 14px;
+  }
+
+  .filtro input {
+    font-size: 13px;
+  }
+
+  .card-header {
+    margin-bottom: 15px;
+  }
+
+  mat-card-title {
+    font-size: 21px;
+  }
+
+  .full-width-table {
+    min-width: 560px;
+  }
+
+  th.mat-mdc-header-cell {
+    font-size: 13px;
+  }
+
+  td.mat-mdc-cell {
+    font-size: 13px;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONO
+   ========================= */
+
+@media (max-width: 480px) {
+
+   .filtro {
+    width: calc(100% - 20px);
+    max-width: 100%;
+    margin-right:10px;
+    margin-bottom: 12px;
+  }
+
+  .full-width {
+    margin: 5px auto;
+    padding: 6px;
+
+    border-radius: 10px;
+  }
+
+  .card-header {
+    padding: 8px 5px;
+  }
+
+  mat-card-title {
+    font-size: 20px;
+    margin-left: 25px;
+  }
+
+  .full-width-table {
+    min-width: 550px;
+  }
+
+  .mat-column-categoria {
+    min-width: 150px;
+  }
+
+  .mat-column-nombre_empresa {
+    min-width: 200px;
+  }
+
+  .mat-column-acciones {
+    width: 140px;
+    min-width: 140px;
+  }
+
+  .mat-column-acciones button {
+    margin: 0;
+  }
+
+}

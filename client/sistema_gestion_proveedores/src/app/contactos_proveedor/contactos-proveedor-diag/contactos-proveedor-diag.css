@@ -1,0 +1,180 @@
+.detalle-contacto {
+  width: 100%;
+  min-width: 0;
+
+  padding: 5px 0;
+}
+
+
+/* =========================
+   FILAS
+   ========================= */
+
+.campo {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 15px 5px;
+
+  border-bottom: 1px solid #f0f0f0;
+
+  font-size: 15px;
+}
+
+
+/* Última fila sin borde */
+.campo:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================
+   ETIQUETAS
+   ========================= */
+
+.campo strong {
+  width: 150px;
+  min-width: 150px;
+
+  color: #555;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   VALORES
+   ========================= */
+
+.campo span {
+  min-width: 0;
+
+  color: #333;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   ESTADO
+   ========================= */
+
+.estado {
+  display: inline-block;
+
+  padding: 5px 12px;
+
+  border-radius: 15px;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.estado.principal {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.estado.secundario {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+
+/* =========================
+   TÍTULO
+   ========================= */
+
+h2[mat-dialog-title] {
+  margin: 0;
+
+  padding-bottom: 15px;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  color: #222;
+
+  border-bottom: 1px solid #eee;
+}
+
+
+/* =========================
+   CONTENIDO
+   ========================= */
+
+mat-dialog-content {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ACCIONES
+   ========================= */
+
+mat-dialog-actions {
+  padding-top: 18px;
+}
+
+mat-dialog-actions button {
+  min-width: 100px;
+}
+
+
+/* =========================
+   TABLET / MÓVIL
+   ========================= */
+
+@media (max-width: 600px) {
+
+  h2[mat-dialog-title] {
+    font-size: 21px;
+    line-height: 1.25;
+  }
+
+  .campo {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 5px;
+
+    padding: 12px 2px;
+
+    font-size: 14px;
+  }
+
+  .campo strong {
+    width: auto;
+    min-width: 0;
+  }
+
+  mat-dialog-actions button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================
+   TELÉFONO PEQUEÑO
+   ========================= */
+
+@media (max-width: 400px) {
+
+  h2[mat-dialog-title] {
+    font-size: 20px;
+  }
+
+  .campo {
+    padding: 10px 0;
+  }
+
+  .estado {
+    font-size: 12px;
+  }
+
+}

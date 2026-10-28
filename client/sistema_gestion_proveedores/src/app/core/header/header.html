@@ -1,0 +1,121 @@
+<header class="main-header">
+
+  <div class="brand">
+    <mat-icon>business</mat-icon>
+
+    <div>
+      <span class="brand-title">
+        Gestión de Proveedores
+      </span>
+
+      <span class="brand-subtitle">
+        Sistema administrativo
+      </span>
+    </div>
+  </div>
+
+  @if (usuarioActual) {
+
+    <nav class="nav-links">
+
+      <button
+        mat-button
+        type="button"
+        (click)="irA('/dashboard')"
+      >
+        <mat-icon>dashboard</mat-icon>
+        Inicio
+      </button>
+
+      <button
+        mat-button
+        type="button"
+        (click)="irA('/proveedores')"
+      >
+        <mat-icon>business</mat-icon>
+        Proveedores
+      </button>
+
+      <button
+        mat-button
+        type="button"
+        (click)="irA('/contactos')"
+      >
+        <mat-icon>contacts</mat-icon>
+        Contactos
+      </button>
+
+      <button
+        mat-button
+        type="button"
+        (click)="irA('/evaluaciones')"
+      >
+        <mat-icon>star</mat-icon>
+        Evaluaciones
+      </button>
+
+      @if (esAdministrador) {
+       <button
+            mat-button
+            type="button"
+            (click)="irA('/categorias')"
+        >
+            <mat-icon>category</mat-icon>
+            Categorías
+        </button>
+
+        <button
+            mat-button
+            type="button"
+            (click)="irA('/usuarios')"
+        >
+            <mat-icon>group</mat-icon>
+            Usuarios
+        </button>
+            }
+
+    </nav>
+
+   <div class="user-section">
+
+  <div class="user-info">
+    <mat-icon>account_circle</mat-icon>
+
+    <div>
+      <strong>
+        {{ usuarioActual.nombre }}
+      </strong>
+
+      <span>
+        {{ formatearRol(usuarioActual.rol) }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Mi perfil -->
+  <button
+    mat-icon-button
+    type="button"
+    matTooltip="Mi perfil"
+    aria-label="Mi perfil"
+    (click)="irA('/perfil')"
+  >
+    <mat-icon>manage_accounts</mat-icon>
+  </button>
+
+  <!-- Cerrar sesión -->
+  <button
+    mat-icon-button
+    type="button"
+    matTooltip="Cerrar sesión"
+    aria-label="Cerrar sesión"
+    (click)="cerrarSesion()"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</div>
+
+  }
+
+</header>
