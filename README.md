@@ -12,7 +12,7 @@ Además, incorpora autenticación y control de acceso basado en roles, así como
 
 El manual de usuario proporciona instrucciones para navegar por el sistema y utilizar sus funcionalidades, incluyendo la gestión de proveedores, contactos, categorías, evaluaciones y usuarios. También describe los permisos disponibles según el rol asignado.
 
-**[Consultar el Manual de Usuario (PDF)](docs/Manual de Usuario Sistema_Gestión_Proveedores.pdf)**
+**[Consultar el Manual de Usuario (PDF)](docs/Manual%20de%20Usuario%20Sistema_Gesti%C3%B3n_Proveedores.pdf)**
 
 ## Capturas de pantalla
 
