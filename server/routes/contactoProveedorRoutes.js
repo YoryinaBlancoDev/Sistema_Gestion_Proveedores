@@ -4,8 +4,8 @@ const router=express.Router();
 import contactoProveedorController from "../controllers/contactoProveedorController.js";
 import verificarToken from "../middlewares/authMiddleware.js"; 
 //Rutas de contacto
-router.get("/",verificarToken,contactoProveedorController.get); 
-router.get("/:id",verificarToken,contactoProveedorController.getById); 
-router.post("/", contactoProveedorController.create);
-router.put("/:id", contactoProveedorController.update); 
+router.get("/", verificarToken, contactoProveedorController.get);
+router.get("/:id", verificarToken, contactoProveedorController.getById);
+router.post("/", verificarToken, contactoProveedorController.create);
+router.put("/:id", verificarToken, contactoProveedorController.update); 
 export default router;

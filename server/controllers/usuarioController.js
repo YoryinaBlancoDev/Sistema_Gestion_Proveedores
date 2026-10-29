@@ -396,24 +396,49 @@ const update = async (request, response, next) => {
   });
 }
 
+const errores = [];
+
 if (
-  (usuario.nombre !== undefined &&
-    (typeof usuario.nombre !== "string" || !usuario.nombre.trim())) ||
-  (usuario.apellido !== undefined &&
-    (typeof usuario.apellido !== "string" || !usuario.apellido.trim())) ||
-  (usuario.correo !== undefined &&
-    (typeof usuario.correo !== "string" ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usuario.correo))) ||
-  (usuario.rol !== undefined &&
-    !["ADMINISTRADOR", "COMPRAS", "CONSULTA"].includes(usuario.rol)) ||
-  (usuario.activo !== undefined &&
-    typeof usuario.activo !== "boolean") ||
-  (usuario.password !== undefined &&
-    (typeof usuario.password !== "string" ||
-      usuario.password.length < 8))
+  usuario.nombre !== undefined &&
+  (typeof usuario.nombre !== "string" || !usuario.nombre.trim())
 ) {
+  errores.push("nombre");
+}
+
+if (
+  usuario.apellido !== undefined &&
+  (typeof usuario.apellido !== "string" || !usuario.apellido.trim())
+) {
+  errores.push("apellido");
+}
+
+if (
+  usuario.rol !== undefined &&
+  !["ADMINISTRADOR", "COMPRAS", "CONSULTA"].includes(usuario.rol)
+) {
+  errores.push("rol");
+}
+
+if (
+  usuario.activo !== undefined &&
+  typeof usuario.activo !== "boolean"
+) {
+  errores.push("activo");
+}
+
+(usuario.password !== undefined &&
+  usuario.password !== "" &&
+  (
+    typeof usuario.password !== "string" ||
+    usuario.password.length < 8
+  ))
+
+if (errores.length > 0) {
+  console.error("Campos inválidos al actualizar usuario:", errores);
+
   return response.status(400).json({
     message: "Los datos del usuario no son válidos.",
+    campos: errores,
   });
 }
 
