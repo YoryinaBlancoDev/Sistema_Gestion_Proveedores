@@ -8,6 +8,12 @@ El Sistema de Gestión de Proveedores permite administrar la información de los
 
 Además, incorpora autenticación y control de acceso basado en roles, así como un dashboard con indicadores generales que permiten consultar información relevante para la gestión de proveedores.
 
+## Manual de usuario
+
+El manual de usuario proporciona instrucciones para navegar por el sistema y utilizar sus funcionalidades, incluyendo la gestión de proveedores, contactos, categorías, evaluaciones y usuarios. También describe los permisos disponibles según el rol asignado.
+
+**[Consultar el Manual de Usuario (PDF)](docs/Manual_Usuario_Proveedores.pdf)**
+
 ## Capturas de pantalla
 
 ### Inicio de sesión
@@ -45,6 +51,7 @@ Además, incorpora autenticación y control de acceso basado en roles, así como
 ## Tecnologías utilizadas
 
 ### Frontend
+
 - Angular
 - TypeScript
 - Angular Material
@@ -52,15 +59,18 @@ Además, incorpora autenticación y control de acceso basado en roles, así como
 - CSS3
 
 ### Backend
+
 - Node.js
 - Express
 - JavaScript y TypeScript
 - Prisma ORM
 
 ### Base de datos
+
 - MySQL / MariaDB
 
 ### Herramientas de desarrollo
+
 - Git y GitHub
 - npm
 
@@ -82,6 +92,10 @@ Sistema_Gestion_Proveedores/
 │   └── prisma.config.ts
 ├── docs/
 │   ├── capturas/
+│   │   ├── inicio-sesion.png
+│   │   ├── dashboard.png
+│   │   └── proveedores.png
+│   ├── Manual_Usuario_Proveedores.pdf
 │   └── instalacion.md
 ├── .gitignore
 └── README.md
@@ -103,4 +117,3 @@ La guía también incluye los pasos para aplicar las migraciones y cargar los da
 ## Estado del proyecto
 
 Proyecto desarrollado con fines académicos y de portafolio profesional.
-
