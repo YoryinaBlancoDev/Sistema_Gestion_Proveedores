@@ -2,7 +2,7 @@
 
 Esta guía describe los pasos necesarios para configurar, instalar y ejecutar localmente el Sistema de Gestión de Proveedores.
 
-1. Requisitos previos
+## 1. Requisitos previos
 
 Antes de instalar el proyecto, asegúrate de contar con las siguientes herramientas:
 
