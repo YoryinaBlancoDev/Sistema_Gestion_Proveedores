@@ -2,14 +2,43 @@
 
 Esta guía describe los pasos necesarios para configurar, instalar y ejecutar localmente el Sistema de Gestión de Proveedores.
 
-## 1. Requisitos previos
+1. Requisitos previos
 
-Instalar las siguientes herramientas:
+Antes de instalar el proyecto, asegúrate de contar con las siguientes herramientas:
 
-- **Node.js:** versión compatible con Angular 21 y Prisma 7. Se recomienda utilizar Node.js 22.
-- **npm:** gestor de paquetes de Node.js.
-- **MySQL o MariaDB:** motor de base de datos compatible con la configuración del proyecto.
-- **Git:** para clonar el repositorio.
+Node.js: versión 22.19.0.
+
+npm: versión 11.21.1.
+
+MySQL o MariaDB: motor de base de datos compatible con la configuración del proyecto.
+
+Git: para clonar el repositorio.
+
+Tecnologías y versiones del frontend
+
+Angular: 21.2.25.
+
+Angular CLI: 21.2.28.
+
+Angular Material: 21.2.14.
+
+Angular CDK: 21.2.14.
+
+Tecnologías y versiones del backend
+
+Node.js: 22.19.0.
+
+Express: framework para el servidor backend.
+
+Prisma ORM: 7.10.1.
+
+Prisma Client: 7.9.1.
+
+Adaptador MariaDB: 7.10.1.
+
+Se recomienda conservar los archivos package.json y package-lock.json de ambas aplicaciones para mantener las dependencias y facilitar una instalación reproducible.
+
+Nota: las versiones indicadas corresponden a las dependencias instaladas y verificadas durante la preparación de esta guía. Los resultados de npm audit obtenidos en el frontend y el backend reportaron cero vulnerabilidades.
 
 ## 2. Clonar el repositorio
 
